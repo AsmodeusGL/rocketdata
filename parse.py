@@ -9,7 +9,7 @@ def parse_kfc(url):
     return list_
 
 
-with open('kfc.json', 'w') as file:
+with open('kfc.json', 'w', encoding='utf-8') as file:
     main_arr = []
     for item in parse_kfc('https://api.kfc.com/api/store/v2/store.get_restaurants?showClosed=true'):
         dictionary = {'name': item['title']['ru'], 'latlon': item['contacts']['coordinates']['geometry']['coordinates'], 'phones': item['contacts']['phoneNumber']}
@@ -25,4 +25,4 @@ with open('kfc.json', 'w') as file:
         else:
             dictionary['working_hours'] = 'closed'
         main_arr.append(dictionary)
-    json.dump(main_arr, file, indent=3, ensure_ascii=False)
+    json.dump(main_arr, file, ensure_ascii=False, indent=3)
